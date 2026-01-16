@@ -1,0 +1,24 @@
+/**
+ * ARCHIVO MAESTRO DE ESTILOS (Main Entry Point)
+ * Este archivo centraliza la carga de todos los sub-módulos CSS.
+ * Permite una arquitectura modular, facilitando el mantenimiento y la escalabilidad.
+ */
+
+/* ==========================================
+   1. BASE Y ESTRUCTURA (Layout)
+   Define las variables globales (:root), el fondo, el body 
+   y el contenedor principal del login.
+   ========================================== */
+@import url('auth-layout.css');
+
+/* ==========================================
+   2. COMPONENTES Y UI (Elementos específicos)
+   Contiene el diseño de los botones, formularios, logos,
+   animaciones de los botones flotantes y ventanas modales.
+   ========================================== */
+@import url('auth-components.css');
+
+/**
+ * NOTA TÉCNICA: El uso de @import permite que el navegador 
+ * identifique las dependencias de estilo de forma jerárquica.
+ */

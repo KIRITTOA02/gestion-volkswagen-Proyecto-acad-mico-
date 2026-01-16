@@ -1,0 +1,75 @@
+gestion-volkswagen/
+│
+├── backend/
+│   ├── node_modules/
+│   ├── src/
+│   │   ├── config/
+│   │   │     └── database.js
+│   │   ├── controllers/
+|   |   |     └── estructura.controller.js
+│   │   ├── routes/
+|   |   |     └── estructura.routes.js
+│   │   ├── app.js
+│   │   └── server.js
+|   |
+│   ├── uploads/
+│   ├── .env.example 
+│   ├── package-lock.json
+│   └── package.json
+|
+├── database/
+│   └── schema.sql
+│
+├── frontend/
+|   | 
+|   ├── assets/
+|   │    ├── screenshots/
+│   |    └── img/
+|   |
+│   ├──auth/
+│   │   ├── css/
+|   │   │    ├── auth-layout.css
+│   │   │    ├── auth-components.css
+│   │   │    └── auth-main.css
+│   │   │
+│   │   ├── js/
+│   │   │   ├── auth-ui.js
+│   │   │   ├── auth-main.js
+│   │   │   └── auth-logic.js
+│   │   │
+│   │   └── auth.html
+│   │
+│   └──home/
+|       |
+|       ├── css/
+|       │    ├── base.css
+|       │    ├── layout.css
+|       │    ├── components.css
+|       │    ├── control.css
+|       │    ├── excel.css
+|       │    ├── modal.css
+|       │    ├── crud.css
+|       │    ├── narvar.css
+|       │    └── tables.css
+│       │
+|       ├── js/
+|       │    ├── service/
+|       │    │     ├── tablas.js
+|       │    │     ├── columnas.js
+|       │    │     ├── crud.js
+|       │    │     └── datos.js
+|       │    ├── data.js
+|       │    ├── logout.js
+|       │    ├── main.js
+|       │    ├── excel.js
+|       │    ├── search.js
+|       │    └── ui.js
+|       │ 
+│       └── home.html
+│
+├── uploads/
+│
+│
+├── README.md
+├── arbol.txt
+└── .gitignore

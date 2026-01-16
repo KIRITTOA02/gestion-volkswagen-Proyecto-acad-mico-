@@ -1,0 +1,139 @@
+/**
+ * COMPONENTES DE INTERFAZ Y ELEMENTOS INTERACTIVOS
+ * Gestiona botones de navegación, menús desplegables (dropdowns) 
+ * y botones de acción rápida con la identidad visual de VW.
+ */
+
+/* ==========================================
+   NAVEGACIÓN (ESTADOS ACTIVOS)
+   ========================================== */
+
+/* Resalte visual para el botón de navegación activo */
+.menu-item.active-nav {
+    background-color: var(--vw-blue) !important;
+    color: white !important;
+}
+
+.menu-item.active-nav i {
+    color: white !important;
+}
+
+/* Control de visibilidad del panel mediante clases dinámicas */
+.hidden-panel {
+    display: none !important;
+}
+
+/* Botón de inicio (Home) - Estado base */
+[data-page="home"] {
+    background-color: transparent; 
+    color: #001e50;
+    transition: all 0.3s ease;
+}
+
+/* Botón de inicio (Home) - Estado activo con elevación */
+[data-page="home"].active-nav {
+    background-color: var(--vw-blue) !important;
+    color: white !important;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+[data-page="home"].active-nav i {
+    color: white !important;
+}
+
+/* ==========================================
+   WIDGET DE ACCIONES (DROPDOWN MENU)
+   ========================================== */
+
+.menu-widget-container {
+    position: relative;
+    display: inline-block;
+}
+
+/* Botón disparador del menú (3 puntos verticales) */
+.menu-toggle-btn {
+    background: #001e50;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+/* Micro-interacción: Rotación del icono al abrir el menú */
+.menu-toggle-btn i {
+    transition: transform 0.3s ease;
+    display: inline-block;
+}
+
+.menu-toggle-btn.is-active i {
+    transform: rotate(90deg);
+}
+
+/* Contenedor del menú flotante */
+.dropdown-menu {
+    display: none; 
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: white;
+    min-width: 180px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    z-index: 1000;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+/* Clase de activación para visualización mediante JS */
+.dropdown-menu.show {
+    display: block;
+}
+
+/* Estilos de los ítems individuales del menú */
+.dropdown-item {
+    color: #333;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+}
+
+.dropdown-item:hover {
+    background-color: #f1f1f1;
+}
+
+/* ==========================================
+   BOTONES DE ACCIÓN RÁPIDA (HERRAMIENTAS)
+   ========================================== */
+
+/* Botón específico para la importación de archivos Excel */
+.import-excel-button {
+    background-color: #001e50;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px; 
+    width: 44px;
+    transition: background-color 0.3s ease;
+}
+
+.import-excel-button:hover {
+    background-color: #002c7a;
+}
+
+/* Layout para alinear múltiples botones de herramientas */
+.search-panel-right {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}

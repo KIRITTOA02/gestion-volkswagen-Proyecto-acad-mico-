@@ -1,0 +1,67 @@
+/* --- LAYOUT BASE --- */
+body {
+  margin: 0;
+  background-color: #ffffff !important;
+  min-height: 100vh;
+}
+
+#bg-layer {
+  position: fixed;
+  inset: 0;
+  background: url('../../assets/img/1.jpg') center/cover no-repeat;
+  z-index: 0;
+  transition: all 0.8s ease;
+  opacity: 1;
+  filter: blur(0px) brightness(100%);
+}
+
+/* CORRECCIÓN AQUÍ: Agregada la coma entre selectores */
+body.table-active #bg-layer,
+body.panel-active #bg-layer {
+  opacity: 0.6 !important; 
+  filter: blur(8px) brightness(80%) !important;
+  visibility: visible !important;
+}
+
+.container {
+  position: relative;
+  z-index: 10;
+}
+
+/* --- COMPONENTES (BOTONES Y PANELES) --- */
+
+.hidden-panel {
+  display: none !important;
+}
+
+/* Botón en estado normal */
+[data-page="home"] {
+  background-color: transparent;
+  color: #001e50;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 15px;
+  border-radius: 4px;
+}
+
+/* BOTÓN ACTIVO: Fondo Blanco, Texto Azul (Como en tu imagen) */
+[data-page="home"].active-nav {
+  background-color: #ffffff !important;
+  color: #001e50 !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+[data-page="home"].active-nav i {
+  color: #001e50 !important;
+}
+
+.dashboard-card {
+  background: white !important;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  margin-top: 20px;
+  position: relative;
+  z-index: 20;
+}

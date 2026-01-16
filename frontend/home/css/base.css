@@ -1,0 +1,88 @@
+/* home/css/base.css */
+:root {
+  --vw-blue: #002C5F;
+  --vw-light-blue: #0060A9;
+  --vw-red: #d83f44;
+  --gray-dark: #333;
+  --gray-medium: #666;
+  --gray-light: #f5f5f5;
+  --white: #ffffff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', 'Helvetica', sans-serif;
+  background-color: #ffffff !important; /* Mantenemos tu preferencia de fondo blanco */
+  color: var(--gray-dark);
+  min-height: 100vh;
+  overflow-x: hidden; /* Evita scroll horizontal en todo el body */
+}
+
+/* --- CAPA DE FONDO --- */
+#bg-layer {
+  position: fixed;
+  inset: 0;
+  background: url('../../assets/img/5.jpg') center/cover no-repeat;
+  z-index: 0;
+  transition: all 0.8s ease;
+  opacity: 1;
+  filter: blur(0px) brightness(100%);
+}
+
+body.table-active #bg-layer,
+body.panel-active #bg-layer {
+  opacity: 0.6 !important; 
+  filter: blur(8px) brightness(80%) !important;
+  visibility: visible !important;
+}
+
+/* --- CONTENEDOR PRINCIPAL (CORREGIDO PARA TAMAÑO) --- */
+.container {
+  position: relative;
+  z-index: 10;
+  width: 95%;           /* Ocupa casi toda la pantalla */
+  max-width: 1800px;    /* Pero se detiene en 1800px para no deformarse en monitores UltraWide */
+  margin: 0 auto;       /* Centra el contenido */
+  padding: 80px 20px 20px 20px; /* Espacio superior para que no choque con la Navbar */
+  transition: all 0.3s ease;
+}
+
+/* --- COMPONENTES --- */
+.hidden-panel {
+  display: none !important;
+}
+
+/* Botón Nav */
+[data-page="home"] {
+  background-color: transparent;
+  color: #001e50;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 15px;
+  border-radius: 4px;
+}
+
+[data-page="home"].active-nav {
+  background-color: #ffffff !important;
+  color: #001e50 !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+/* --- TARJETAS (CARDS) ESCALABLES --- */
+.dashboard-card {
+  background: white !important;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  margin-top: 20px;
+  width: 100%;          /* Que siempre use el 100% de su padre (.container) */
+  position: relative;
+  z-index: 20;
+  overflow: hidden;     /* Para que las tablas no se salgan de los bordes redondeados */
+}

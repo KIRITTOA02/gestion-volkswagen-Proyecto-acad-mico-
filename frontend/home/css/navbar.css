@@ -1,0 +1,149 @@
+/* home/css/narvar.css */
+
+:root {
+    --vw-blue: #001e50;
+    --vw-red: #eb0a1e;
+    --white: #ffffff;
+    --gray-light: #f8f9fa;
+}
+
+/* Navbar principal */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--white);
+    padding: 10px 30px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    height: 68px;
+}
+
+/* Lado izquierdo */
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo img {
+    height: 44px;
+    width: auto;
+}
+
+/* --- BOTÓN PANEL DE CONTROL --- */
+.control-button-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.control-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--vw-blue);
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    background: transparent;
+    border: 1px solid rgba(0, 30, 80, 0.1);
+}
+
+/* --- MENÚ DE PESTAÑAS (TABLAS) --- */
+.horizontal-menu-wrapper {
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    margin-left: 20px;
+    max-width: 65vw;
+}
+
+.horizontal-menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 8px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--vw-blue);
+    text-decoration: none;
+    padding: 6px 15px;
+    border-radius: 8px 8px 0 0;
+    font-weight: 500;
+    font-size: 0.95rem;
+    background: var(--gray-light);
+    border: 1px solid #eee;
+    border-bottom: none;
+    height: 38px;
+}
+
+/* Íconos */
+.menu-item i, .control-btn i {
+    font-size: 1.2rem;
+}
+
+/* Logout */
+.logout-btn {
+    background: var(--vw-red);
+    color: white;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.3s;
+}
+
+.logout-btn:hover {
+    background: #c00818;
+}
+
+/* Scrollbar */
+.horizontal-menu-wrapper::-webkit-scrollbar {
+    height: 4px;
+}
+.horizontal-menu-wrapper::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.971);
+    border-radius: 10px;
+}
+
+/* --- ESTADO ACTIVO (RESTABLECIMIENTO DE DISEÑO) --- */
+
+/* Aplica a las pestañas y al botón de Panel de Control cuando están activos */
+.menu-item.active, 
+.control-btn.active {
+    background-color: var(--vw-blue) !important;
+    color: var(--white) !important;
+    border-color: var(--vw-blue) !important;
+    box-shadow: 0 4px 10px rgba(0, 30, 80, 0.2);
+}
+
+/* Asegura que los iconos dentro del botón activo también cambien a blanco */
+.menu-item.active i, 
+.control-btn.active i {
+    color: var(--white) !important;
+}
+
+/* Hover sutil para items no activos */
+.menu-item:hover:not(.active) {
+    background-color: #e9ecef;
+    border-color: #ddd;
+}
+
+/* Ajuste para que el texto no se vea azul oscuro sobre el fondo azul */
+.menu-item.active span {
+    color: var(--white) !important;
+}

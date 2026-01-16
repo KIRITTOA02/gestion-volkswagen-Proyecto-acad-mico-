@@ -1,0 +1,66 @@
+/* home/css/modal.css */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  display: none;
+}
+
+.modal-content {
+  background: white;
+  padding: 35px;
+  border-radius: 12px;
+  text-align: center;
+  width: 90%;
+  max-width: 420px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.modal-content h3 {
+  margin-bottom: 30px;
+  color: var(--gray-dark);
+}
+
+.modal-content button {
+  padding: 12px 28px;
+  margin: 0 10px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+
+/* Efecto de escala al pasar el mouse por los botones */
+.modal-content button:hover {
+  transform: translateY(-2px);
+  filter: brightness(0.9);
+}
+
+#confirmarSalir {
+  background: var(--vw-red);
+  color: white;
+}
+
+#confirmarSalir:hover {
+  background: var(--vw-red);
+}
+
+.modal-content button:last-child {
+  background: #e0e0e0;
+}
+
+.modal-content button:last-child:hover {
+  background: #ccc;
+}

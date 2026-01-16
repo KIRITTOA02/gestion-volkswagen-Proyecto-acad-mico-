@@ -1,0 +1,271 @@
+/* ==========================================================================
+   MÓDULO: Vistas de Tablas de Datos
+   DESCRIPCIÓN: Estilos globales para contenedores dinámicos, tarjetas de 
+                información y visualización de conjuntos de datos masivos.
+   SISTEMA: Dashboard Administrativo
+   ========================================================================== */
+
+/**
+ * Contenedor principal de vistas de tabla.
+ * Gestiona el espaciado vertical y la alineación central del contenido.
+ */
+.table-view {
+  display: flex;
+  flex-direction: column;
+  transform: translateY(100px);
+  gap: 30px;
+  position: relative;
+  z-index: 5;
+  max-width: 1400px;
+  margin: 100px auto;
+}
+
+/**
+ * Componente Card (Tarjeta).
+ * Define la estructura visual base para las secciones del dashboard.
+ */
+.dashboard-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  border: 1px solid #e0e0e0;
+  animation: slideUp 0.4s ease-out;
+}
+
+/**
+ * Animación de entrada.
+ * Proporciona una transición suave de opacidad y desplazamiento ascendente.
+ */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/**
+ * Encabezado de componente Card.
+ * Incluye soporte para títulos y acciones de control (ej. botones de cierre).
+ */
+.card-header {
+  background: #002C5F;
+  color: white;
+  padding: 15px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-header h2 {
+  margin: 10px;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+/**
+ * Control de cierre de interfaz.
+ * Botón circular con estados de interacción definidos.
+ */
+.btn-close-table {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s;
+}
+
+.btn-close-table:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/**
+ * Estilos base de tablas de datos.
+ * Optimización de legibilidad y espaciado de celdas.
+ */
+.table-container {
+  padding: 20px;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+table th,
+table td {
+  padding: 14px 18px;
+  text-align: left;
+  border-bottom: 1px solid #e9ecef;
+}
+
+table th {
+  background: #f8f9fa;
+  color: #002C5F;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+}
+
+table tr:hover {
+  background: #f0f7ff;
+}
+
+/**
+ * Bloque de resultados de búsqueda global.
+ * Define la jerarquía visual para los elementos encontrados en el buscador.
+ */
+.search-results-header {
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    border: 1px solid #e0e0e0;
+    margin-bottom: 30px;
+}
+
+.search-results-header .header-blue {
+    background-color: #002C5F;
+    color: #ffffff;
+    padding: 15px 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-results-header h2 {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+/**
+ * Visualización individual de tabla en resultados.
+ */
+.resultado-tabla {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    padding: 20px;
+    margin-bottom: 30px;
+    border: 1px solid #e0e0e0;
+}
+
+.resultado-tabla h3 {
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+/**
+ * Sección de metadatos y relaciones de datos.
+ * Utiliza un acento lateral para destacar información complementaria.
+ */
+.relations-section {
+    background: #f4f7f9;
+    padding: 25px;
+    border-radius: 12px;
+    border-left: 6px solid #002C5F;
+    margin-top: 40px;
+}
+
+.relations-section h2 {
+    color: #002C5F;
+    margin-bottom: 20px;
+}
+
+/**
+ * Estructura de tabla principal (Main Table).
+ * Optimización de cabeceras y estados de fila.
+ */
+.main-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.main-table th {
+    background-color: #002C5F;
+    color: white;
+    padding: 12px;
+    text-align: center;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+.main-table td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    text-align: center;
+    color: #333;
+}
+
+.main-table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+/**
+ * Configuraciones de adaptabilidad y Big Data.
+ * Optimizaciones para el manejo de grandes volúmenes de información y scroll.
+ */
+
+/* Contenedor con soporte para desbordamiento horizontal */
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    margin-top: 10px;
+    border-radius: 0 0 8px 8px;
+}
+
+/* Ajuste de altura dinámica basado en volumen de filas */
+.dashboard-card, .resultado-tabla {
+    height: auto;
+    max-height: none; 
+    display: flex;
+    flex-direction: column;
+}
+
+/* Configuración de renderizado para tablas extensas */
+.main-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    min-width: 800px;
+}
+
+/* Soporte para cabeceras fijas (Sticky Header) */
+.main-table th {
+    background-color: #002C5F;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    white-space: nowrap;
+}
+
+/* Gestión de truncado de texto en celdas de datos */
+.main-table td {
+    white-space: nowrap;
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

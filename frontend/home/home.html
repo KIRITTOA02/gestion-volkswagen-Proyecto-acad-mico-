@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gestión de Recursos VW</title>
+
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/navbar.css" />
+  <link rel="stylesheet" href="css/modal.css" />
+  <link rel="stylesheet" href="css/tables.css" />
+  <link rel="stylesheet" href="css/control.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/crud.css" />
+  <link rel="stylesheet" href="css/excel.css" />
+</head>
+
+<body>
+
+  <div id="import-excel-modal" class="modal-overlay">
+    <div class="modal-content import-modal">
+      <h3>Importar Archivo Excel</h3>
+      <div id="drop-area" class="drop-zone">
+        <i class="bx bx-cloud-upload" style="font-size: 48px"></i>
+        <p>Arrastra tu archivo Excel aquí o haz clic para seleccionarlo</p>
+      </div>
+      <input type="file" id="excelFileInput" accept=".xlsx,.xls" style="display: none" />
+
+      <div class="modal-buttons">
+        <button type="button" id="cancelImportBtn" class="modal-btn no-btn">
+          Cancelar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="bg-layer"></div>
+
+  <div class="container">
+    <header class="navbar">
+      <div class="header-left">
+        <div class="logo">
+          <img src="../assets/img/logo.png" alt="VW" />
+        </div>
+
+        <div class="control-button-wrapper">
+          <a href="#" class="menu-item control-btn" data-page="home">
+            <i class="bx bx-grid-alt"></i>
+            <span>Panel de Control</span>
+          </a>
+        </div>
+
+        <nav class="horizontal-menu-wrapper">
+          <ul id="dynamic-menu-list" class="horizontal-menu"></ul>
+        </nav>
+      </div>
+
+      <div class="header-right">
+        <button id="logout-btn" class="logout-btn">
+          <i class="bx bx-log-out"></i>
+          Cerrar Sesión
+        </button>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <section id="home-page" class="page active">
+        <div id="control-panel-content" class="control-panel-body hidden-panel">
+          <div class="panel-header" style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="header-text">
+              <h1>Gestión de Recursos VW</h1>
+              <p>Bienvenido al Panel de Control. Utiliza los filtros para buscar información.
+              </p>
+            </div>
+
+            <div class="search-panel-right" style="display: flex; gap: 10px; align-items: center">
+              <button id="importExcelButton" class="import-excel-button" title="Importar Excel">
+                <i class="bx bx-upload"></i> <span>Importar Excel</span>
+              </button>
+
+              <div class="menu-widget-container">
+                <button class="menu-toggle-btn" id="dropdown-toggle">
+                  <i class="bx bx-dots-vertical-rounded"></i>
+                </button>
+
+                <div id="dropdown-menu-content" class="dropdown-menu">
+                  <a href="#" id="create-table-link" class="dropdown-item"><i class="bx bx-table"></i> Crear Nueva Tabla</a>
+                  <a href="#" id="delete-table-link" class="dropdown-item"><i class="bx bx-trash"></i> EliminarTabla</a>
+                  <a href="#" id="add-column-link" class="dropdown-item"><i class="bx bx-plus"></i> Agregar Columna</a>
+                  <a href="#" id="remove-column-link" class="dropdown-item"><i class="bx bx-minus"></i> Quitar Columna</a>
+                  <hr />
+                  <a href="#" id="add-data-link" class="dropdown-item"><i class="bx bx-data"></i> Agregar Dato</a>
+                  <a href="#" id="edit-data-link" class="dropdown-item"><i class="bx bx-edit-alt"></i> Editar Dato</a>
+                  <a href="#" id="delete-row-link" class="dropdown-item"><i class="bx bx-trash"></i> Eliminar Dato</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="search-panel">
+            <input type="text" id="searchQuery" placeholder="🔍 Buscar global..." />
+            <select id="filterTabla">
+              <option value="todas">Selecciona una tabla</option>
+            </select>
+            <select id="filterConcesionaria">
+              <option value="todas">Selecciona una concesionaria</option>
+              <option value="Orizaba">Orizaba</option>
+              <option value="Córdoba">Córdoba</option>
+              <option value="Tuxtepec">Tuxtepec</option>
+              <option value="Poza Rica">Poza Rica</option>
+              <option value="Villa Verde">Villa Verde</option>
+            </select>
+            <select id="filterPuesto">
+              <option value="todos">Todos los puestos</option>
+            </select>
+            <select id="filterServer">
+              <option value="todos">Todos los servidores</option>
+              <option value="1">TotalDealer</option>
+              <option value="2">SealsForce</option>
+            </select>
+            <button id="btnBuscar">Buscar</button>
+          </div>
+        </div>
+      </section>
+
+      <div id="table-container" class="table-view"></div>
+    </main>
+  </div>
+
+  <div id="create-table-modal" class="modal-overlay">
+    <div class="modal-content">
+      <h3>Crear Nueva Tabla</h3>
+      <form id="create-table-form">
+        <div class="form-group">
+          <label for="tableName">Nombre de la Tabla:</label>
+          <input type="text" id="tableName" name="tableName" placeholder="Ej. proveedores" required />
+        </div>
+        <h4>Columnas de la Tabla</h4>
+        <div id="columns-container"></div>
+        <button type="button" class="modal-btn" id="add-column-btn">Añadir Columna</button>
+
+        <h3>Llaves Foráneas</h3>
+        <div id="foreignkey-container"></div>
+        <button type="button" id="add-foreignkey-btn" class="add-btn">Agregar Llave Foránea</button>
+        <p class="helper-text-warning">⚠️ Se creará automáticamente una columna de identificación (Ej. 'id_nombretabla') como llave primaria.s</p>
+
+        <div class="modal-buttons">
+          <button type="submit" class="modal-btn yes-btn">Crear Tabla</button>
+          <button type="button" class="modal-btn no-btn">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="delete-table-modal" class="modal-overlay">
+    <div class="modal-content">
+      <h3>Eliminar Tabla</h3>
+      <form id="delete-table-form">
+        <div class="form-group">
+          <label for="deleteTableName">Nombre de la Tabla a Eliminar:</label>
+          <input type="text" id="deleteTableName" name="deleteTableName" placeholder="Ej. proveedores" required />
+        </div>
+        <p class="delete-warning-text">⚠️ Esta acción eliminará permanentemente la tabla del sistema.</p>
+
+        <div class="modal-buttons">
+          <button type="submit" class="modal-btn yes-btn">Eliminar</button>
+          <button type="button" class="modal-btn no-btn">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="add-column-modal" class="modal-overlay">
+    <div class="modal-content">
+      <h3>Agregar Columna a una Tabla</h3>
+      <form id="add-column-form">
+        <div class="form-group">
+          <label for="targetTable">Seleccionar Tabla:</label>
+          <select id="targetTable" name="targetTable" required></select>
+        </div>
+        <div class="form-group">
+          <label for="newColumnName">Nombre de la nueva columna:</label>
+          <input type="text" id="newColumnName" placeholder="Ej. id_departamento" required />
+        </div>
+        <div class="form-group">
+          <label for="newColumnType">Tipo de dato:</label>
+          <select id="newColumnType" required>
+            <option value="VARCHAR(255)">Texto (VARCHAR)</option>
+            <option value="INT">Número Entero (INT)</option>
+            <option value="FK_INT">Llave Foránea (FK)</option>
+            <option value="DATE">Fecha (DATE)</option>
+          </select>
+        </div>
+
+        <div id="fk-fields-container" class="form-group" style="display: none; border: 1px dashed #ccc; padding: 10px; border-radius: 5px; background: #f9f9f9;">
+          <label for="referenceTableSelect">Tabla de Referencia (Destino):</label>
+          <select id="referenceTableSelect" name="referenceTableSelect">
+            <option value="">Seleccione una tabla...</option>
+          </select>
+          <label for="referenceColumnInput" style="margin-top: 10px; display: block">Columna de Referencia (ID destino):</label>
+          <input type="text" id="referenceColumnInput" name="referenceColumnInput" placeholder="id_tabla" readonly style="background: #eee" />
+          <small style="color: #666">Se autocompleta al elegir la tabla.</small>
+        </div>
+        <div class="form-group">
+          <label for="afterColumn">Agregar después de:</label>
+          <select id="afterColumn" name="afterColumn">
+            <option value="FIRST">Primera posición</option>
+          </select>
+        </div>
+
+        <div class="modal-buttons">
+          <button type="submit" class="modal-btn yes-btn">Agregar Columna</button>
+          <button type="button" class="modal-btn no-btn">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="remove-column-modal" class="modal-overlay">
+    <div class="modal-content">
+      <h3>Quitar Columna de una Tabla</h3>
+      <form id="remove-column-form">
+        <div class="form-group">
+          <label for="removeTableSelect">Seleccionar Tabla:</label>
+          <select id="removeTableSelect" name="removeTableSelect" required></select>
+        </div>
+
+        <div class="form-group">
+          <label for="removeColumnSelect">Seleccionar Columna a Eliminar:</label>
+          <select id="removeColumnSelect" name="removeColumnSelect" required>
+            <option value="">Seleccione una tabla primero</option>
+          </select>
+        </div>
+
+        <div class="modal-buttons">
+          <button type="submit" class="modal-btn yes-btn">Eliminar Columna</button>
+          <button type="button" class="modal-btn no-btn">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="add-data-modal" class="modal-overlay">
+    <div class="modal-content">
+      <h3>Agregar Dato a una Tabla</h3>
+      <form id="add-data-form">
+        <label for="dataTableSelect">Seleccionar Tabla:</label>
+        <select id="dataTableSelect" required></select>
+        <div id="dataInputsContainer">
+        </div>
+
+        <div class="modal-buttons">
+          <button type="submit" class="modal-btn yes-btn">Agregar</button>
+          <button type="button" class="modal-btn no-btn">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="edit-data-modal" class="modal-overlay">
+    <div class="modal-content edit-modal">
+      <h3>Editar Dato en una Tabla</h3>
+      <form id="edit-data-form">
+        <label for="editTableSelect">Seleccionar Tabla:</label>
+        <select id="editTableSelect" required></select>
+        <label for="editRowSelect">Seleccionar Registro:</label>
+        <select id="editRowSelect" required>
+          <option value="">Seleccione una tabla primero</option>
+        </select>
+        <div id="editInputsContainer" class="form-fields"></div>
+
+        <div class="modal-buttons">
+          <button type="submit" class="modal-btn yes-btn">Guardar Cambios</button>
+          <button type="button" class="modal-btn no-btn">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="delete-row-modal" class="modal-overlay">
+    <div class="modal-content delete-modal">
+      <h3>Eliminar Fila de una Tabla</h3>
+      <form id="delete-row-form">
+        <label for="deleteTableSelect">Seleccionar Tabla:</label>
+        <select id="deleteTableSelect" required></select>
+        <label for="deleteRowSelect">Seleccionar Registro:</label>
+        <select id="deleteRowSelect" required>
+          <option value="">Seleccione una tabla primero</option>
+        </select>
+        <div id="rowPreviewContainer" class="row-preview">
+          <p>Selecciona un registro para ver los detalles...</p>
+        </div>
+
+        <div class="modal-buttons">
+          <button type="submit" class="modal-btn yes-btn">Eliminar</button>
+          <button type="button" class="modal-btn no-btn">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="modalLogout" class="modal">
+    <div class="modal-content">
+      <h3>¿Deseas cerrar sesión?</h3>
+      <div class="modal-actions">
+        <button id="confirmarSalir">Cerrar Sesión</button>
+        <button id="cancelarLogout">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+<script src="js/data.js"></script>
+    <script src="js/ui.js"></script>
+    
+    <script src="js/service/tablas.js"></script>
+    <script src="js/service/columnas.js"></script>
+    <script src="js/service/datos.js"></script>
+    <script src="js/service/crud.js"></script> <script src="js/excel.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/logout.js"></script>
+
+    <script src="js/main.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Verifica que la función exista antes de llamarla
+            if (typeof window.initCRUD === 'function') {
+                window.initCRUD();
+            }
+        });
+    </script>
+</body>
+</html>

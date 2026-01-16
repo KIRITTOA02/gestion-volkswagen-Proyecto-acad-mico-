@@ -1,0 +1,167 @@
+/**
+ * ==========================================================================
+ * COMPONENTE: Modal de Importación de Excel
+ * DESCRIPCIÓN: Interfaz de usuario para la carga de archivos externos.
+ * Implementa un overlay de alta prioridad y zona de drop.
+ * ==========================================================================
+ */
+
+/**
+ * Capa de superposición (Overlay).
+ * Configurada con el máximo z-index para garantizar visibilidad sobre
+ * cualquier otro elemento de la interfaz.
+ */
+#import-excel-modal.modal-overlay {
+    display: none; 
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background-color: rgba(0, 0, 0, 0.9) !important;
+    z-index: 2147483647 !important;
+    justify-content: center;
+    align-items: center;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    cursor: default;
+}
+
+/**
+ * Estado activo del modal.
+ * Activa el contenedor mediante Flexbox para centrado de contenido.
+ */
+#import-excel-modal.active {
+    display: flex !important;
+}
+
+/**
+ * Contenedor principal del Modal (Canvas).
+ * Define la geometría y el estilo visual del cuadro de diálogo.
+ */
+#import-excel-modal .import-modal {
+    background: #fff !important;
+    width: 90% !important;
+    max-width: 500px !important;
+    padding: 30px !important;
+    border-radius: 15px !important;
+    box-shadow: 0 0 30px rgba(0,0,0,0.5) !important;
+    position: relative !important;
+    transform: none !important;
+    pointer-events: auto !important;
+}
+
+/**
+ * Tipografía de encabezado.
+ * Alineada con la identidad visual corporativa.
+ */
+#import-excel-modal h3 {
+    color: #001e50;
+    margin-bottom: 20px;
+    font-size: 1.6rem;
+    font-weight: 700;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 10px;
+}
+
+/**
+ * Área de Interacción "Drag and Drop".
+ * Proporciona feedback visual para la carga de archivos mediante arrastre.
+ */
+.drop-zone {
+    border: 2px dashed #00b1eb;
+    border-radius: 12px;
+    padding: 60px 20px;
+    background-color: #f8fbff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin: 10px 0;
+}
+
+.drop-zone:hover {
+    background-color: #eef7ff;
+    border-color: #001e50;
+    transform: translateY(-2px);
+}
+
+/**
+ * Estado "Drag Over".
+ * Feedback visual activo cuando un archivo es detectado sobre la zona de carga.
+ */
+.drop-zone.dragover {
+    background-color: #d1e9f5 !important;
+    border-color: #001e50 !important;
+    border-style: solid;
+    transform: scale(1.03);
+}
+
+.drop-zone p {
+    color: #001e50;
+    font-weight: 500;
+    margin: 0;
+    font-size: 14px;
+}
+
+/**
+ * Iconografía del área de carga.
+ */
+.drop-zone i {
+    color: #00b1eb;
+    font-size: 54px !important;
+    transition: transform 0.3s ease;
+}
+
+.drop-zone:hover i {
+    transform: scale(1.1);
+    color: #001e50;
+}
+
+/**
+ * Contenedor de acciones.
+ * Agrupa los botones de control en la parte inferior del modal.
+ */
+#import-excel-modal .modal-buttons {
+    margin-top: 25px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/**
+ * Acción de cancelación / Cierre.
+ */
+#import-excel-modal .no-btn {
+    background-color: #646464;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+#import-excel-modal .no-btn:hover {
+    background-color: #333;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/**
+ * Definición de keyframes para la transición de entrada.
+ * Combina escalado y traslación vertical para un efecto de profundidad.
+ */
+@keyframes modalScaleUp {
+    from {
+        opacity: 0;
+        transform: scale(0.85) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
